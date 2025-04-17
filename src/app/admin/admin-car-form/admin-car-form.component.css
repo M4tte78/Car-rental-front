@@ -1,0 +1,58 @@
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  input, textarea, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    flex: 1 1 180px;
+    font-size: 0.95rem;
+  }
+  
+  input[type="checkbox"] {
+    width: auto;
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  
+  button[type="submit"] {
+    background-color: #e63946;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #d62828;
+  }
+
+  .upload-area {
+    border: 2px dashed #0d6efd;
+    border-radius: 10px;
+    padding: 30px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    background-color: #f8f9fa;
+  }
+  
+  .upload-area:hover {
+    background-color: #e9ecef;
+  }
+  
+  

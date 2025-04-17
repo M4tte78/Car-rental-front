@@ -1,0 +1,76 @@
+<div class="container my-5" *ngIf="car">
+    <h2 class="mb-4 text-center">Détails de la voiture : <strong>{{ car.brand }} {{ car.model }}</strong></h2>
+  
+    <div class="row g-4">
+      <!-- Image voiture -->
+      <div class="col-md-6 text-center">
+        <img
+          [src]="getImageUrl(car.photo)"
+          class="img-fluid rounded shadow-lg"
+          alt="Photo de {{ car.brand }} {{ car.model }}"
+          style="max-height: 400px;"
+        />
+      </div>
+  
+      <!-- Infos voiture -->
+      <div class="col-md-6">
+        <ul class="list-group list-group-flush">
+            <h5 class="card-title mb-0 d-flex align-items-center gap-2">
+                <!-- Pastille colorée via Pipe -->
+                <span 
+                  class="rounded-circle d-inline-block"
+                  [style.backgroundColor]="car.brand | brandColor"
+                  style="width: 12px; height: 12px;"
+                ></span>
+                {{ car.brand }} {{ car.model }}
+              </h5>
+              
+          <li class="list-group-item">
+            <strong>Marque :</strong> {{ car.brand }}
+          </li>
+          <li class="list-group-item">
+            <strong>Modèle :</strong> {{ car.model }}
+          </li>
+          <li class="list-group-item">
+            <strong>Année :</strong> {{ car.year }}
+          </li>
+          <li class="list-group-item">
+            <strong>Prix :</strong> {{ car.price }} € / jour
+          </li>
+          <li class="list-group-item">
+            <strong>Description :</strong> {{ car.description || 'Non renseignée' }}
+          </li>
+          <li class="list-group-item">
+            <strong>Statut :</strong>
+            <span class="badge" [ngClass]="car.available ? 'bg-success' : 'bg-danger'">
+              {{ car.available ? 'Disponible' : 'Indisponible' }}
+            </span>
+          </li>
+          <li class="list-group-item">
+            <strong>Likes :</strong> {{ car.likes }}
+          </li>
+          <li class="list-group-item" *ngIf="!car.available">
+            <strong>Réservée du :</strong> {{ car.reservedFrom | date:'longDate' }}<br />
+            <strong>au :</strong> {{ car.reservedTo | date:'longDate' }}
+          </li>
+          <li class="list-group-item" *ngIf="!car.available && car.customerName">
+            <strong>Client :</strong> {{ car.customerName }}<br />
+            <strong>Email :</strong> {{ car.customerEmail }}
+          </li>
+        </ul>
+  
+        <div class="text-end mt-4">
+          <a [routerLink]="['/reservation', car.id]" class="btn btn-primary">Réserver ce véhicule</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- En cas de chargement -->
+  <div *ngIf="!car" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+    <p class="mt-3">Chargement des informations de la voiture...</p>
+  </div>
+  

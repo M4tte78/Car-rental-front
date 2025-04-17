@@ -1,0 +1,83 @@
+<form (ngSubmit)="submitForm()" [formGroup]="carForm" class="p-4 bg-light rounded shadow-sm">
+    <div class="row g-3">
+  
+      <!-- Marque -->
+      <div class="col-md-6">
+        <label for="brand" class="form-label">Marque</label>
+        <input
+          type="text"
+          class="form-control"
+          id="brand"
+          formControlName="brand"
+          list="brandOptions"
+          (input)="onBrandChange()"
+          placeholder="Choisissez ou écrivez une marque"
+        />
+        <datalist id="brandOptions">
+          <option *ngFor="let brand of carBrands" [value]="brand"></option>
+        </datalist>
+      </div>
+  
+      <!-- Modèle -->
+      <div class="col-md-6">
+        <label for="model" class="form-label">Modèle</label>
+        <input
+          type="text"
+          class="form-control"
+          id="model"
+          formControlName="model"
+          list="modelOptions"
+          placeholder="Choisissez ou écrivez un modèle"
+        />
+        <datalist id="modelOptions">
+          <option *ngFor="let model of availableModels" [value]="model"></option>
+        </datalist>
+      </div>
+  
+      <!-- Année -->
+      <div class="col-md-4">
+        <label class="form-label">Année</label>
+        <input type="number" class="form-control" formControlName="year" placeholder="Année" required>
+      </div>
+  
+      <!-- Prix -->
+      <div class="col-md-4">
+        <label class="form-label">Prix (€)</label>
+        <input type="number" class="form-control" formControlName="price" placeholder="Prix" required>
+      </div>
+  
+      <!-- Disponible -->
+      <div class="col-md-4 d-flex align-items-center mt-4">
+        <label class="form-check-label me-2">Disponible :</label>
+        <input type="checkbox" class="form-check-input" formControlName="available">
+      </div>
+  
+      <!-- Description -->
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" formControlName="description" rows="3" placeholder="Description du véhicule..."></textarea>
+      </div>
+  
+      <!-- Upload photo -->
+      <div class="col-12">
+        <label class="form-label fw-bold">Photo du véhicule</label>
+        <label for="photoInput" class="upload-area d-flex align-items-center justify-content-center flex-column text-center">
+          <i class="bi bi-cloud-arrow-up fs-1 text-primary"></i>
+          <span class="text-muted">Cliquez ou glissez-déposez une image ici</span>
+          <input type="file" id="photoInput" (change)="onFileSelected($event)" class="d-none">
+        </label>
+        <div *ngIf="selectedPhotoName" class="mt-2 text-success text-center">
+          ✅ {{ selectedPhotoName }}
+        </div>
+      </div>
+  
+      <!-- Bouton -->
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-danger mt-3">
+          {{ car ? 'Mettre à jour' : 'Ajouter' }}
+        </button>
+      </div>
+  
+    </div>
+  </form>
+  

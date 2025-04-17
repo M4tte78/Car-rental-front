@@ -1,0 +1,24 @@
+<div class="container mt-5" *ngIf="car">
+    <h2>Réservation en cours pour {{ car.brand }} {{ car.model }}</h2>
+  
+    <div *ngIf="!car.available && car.reservedFrom && car.reservedTo; else noReservation">
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Client :</strong> {{ car.customerName }}</li>
+        <li class="list-group-item"><strong>Email :</strong> {{ car.customerEmail }}</li>
+        <li class="list-group-item">
+          <strong>Dates :</strong> du {{ car.reservedFrom | date:'longDate' }} au {{ car.reservedTo | date:'longDate' }}
+        </li>
+        <button class="btn btn-danger mt-3" (click)="cancelReservation()">
+            ❌ Annuler la réservation
+          </button>
+          
+        <a routerLink="/admin" class="btn btn-secondary mt-4">⬅️ Retour à la liste</a>
+
+      </ul>
+    </div>
+  
+    <ng-template #noReservation>
+      <div class="alert alert-info mt-3">Aucune réservation en cours pour ce véhicule.</div>
+    </ng-template>
+  </div>
+  
